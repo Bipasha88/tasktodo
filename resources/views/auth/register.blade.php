@@ -39,6 +39,11 @@
                 <button type="submit" class="btn btn-success">Register</button>
             </div>
         </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <a href="/login" style="text-decoration: none">Already have account? Login here</a>
+            </div>
+        </div>
     </form>
 </div>
 

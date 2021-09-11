@@ -2099,21 +2099,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Tasks',
@@ -2188,24 +2173,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -37993,211 +37960,149 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card card-white" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "form",
-              {
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.create.apply(null, arguments)
-                  }
+  return _c("div", [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.create.apply(null, arguments)
+          }
+        }
+      },
+      [
+        _c("div", [
+          _c("div", [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.name,
+                  expression: "form.name"
                 }
-              },
-              [
-                _c("div", [
-                  _c("div", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.name,
-                          expression: "form.name"
-                        }
-                      ],
-                      staticClass: "form-control add-task",
-                      attrs: {
-                        type: "text",
-                        name: "name",
-                        placeholder: "New Task..."
-                      },
-                      domProps: { value: _vm.form.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.form, "name", $event.target.value)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    { staticClass: "btn btn-info", attrs: { type: "submit" } },
-                    [_vm._v("Create")]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "ul",
-              { staticClass: "todo-list" },
-              _vm._l(_vm.tasks, function(task) {
-                return _c("div", [
-                  task.status == 0
-                    ? _c("div", [
-                        _c(
-                          "li",
-                          {
-                            staticClass: "todo-item",
-                            staticStyle: { "list-style": "none" }
-                          },
-                          [
-                            _c("div", { staticClass: "checker" }, [
-                              _c("span", {}, [
-                                _c("input", {
-                                  attrs: { type: "checkbox" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.complete(task.id)
-                                    }
-                                  }
-                                })
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("span", [_vm._v(_vm._s(task.name))]),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "pull-right" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.deleteTask(task.id)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Delete")]
-                              )
-                            ])
-                          ]
-                        )
-                      ])
-                    : task.status == 1
-                    ? _c("div", [
-                        _c(
-                          "li",
-                          {
-                            staticClass: "todo-item",
-                            staticStyle: { "list-style": "none" }
-                          },
-                          [
-                            _c("div", { staticClass: "checker" }, [
-                              _c("span", {}, [
-                                _c("input", {
-                                  attrs: { type: "checkbox", checked: "" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.pending(task.id)
-                                    }
-                                  }
-                                })
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("span", [_vm._v(_vm._s(task.name))]),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "pull-right" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.deleteTask(task.id)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Delete")]
-                              )
-                            ])
-                          ]
-                        )
-                      ])
-                    : _vm._e()
-                ])
-              }),
-              0
-            )
-          ])
+              ],
+              staticClass: "form-control add-task",
+              attrs: { type: "text", name: "name", placeholder: "New Task..." },
+              domProps: { value: _vm.form.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "name", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn btn-info", attrs: { type: "submit" } },
+            [_vm._v("Create")]
+          )
         ])
-      ])
-    ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "ul",
+      { staticClass: "todo-list" },
+      _vm._l(_vm.tasks, function(task) {
+        return _c("div", [
+          task.status == 0
+            ? _c("div", [
+                _c(
+                  "li",
+                  {
+                    staticClass: "todo-item",
+                    staticStyle: { "list-style": "none" }
+                  },
+                  [
+                    _c("div", { staticClass: "checker" }, [
+                      _c("span", {}, [
+                        _c("input", {
+                          attrs: { type: "checkbox" },
+                          on: {
+                            click: function($event) {
+                              return _vm.complete(task.id)
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(task.name))]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "pull-right" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-danger",
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteTask(task.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Delete")]
+                      )
+                    ])
+                  ]
+                )
+              ])
+            : task.status == 1
+            ? _c("div", [
+                _c(
+                  "li",
+                  {
+                    staticClass: "todo-item",
+                    staticStyle: { "list-style": "none" }
+                  },
+                  [
+                    _c("div", { staticClass: "checker" }, [
+                      _c("span", {}, [
+                        _c("input", {
+                          attrs: { type: "checkbox", checked: "" },
+                          on: {
+                            click: function($event) {
+                              return _vm.pending(task.id)
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(task.name))]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "pull-right" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-danger",
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteTask(task.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Delete")]
+                      )
+                    ])
+                  ]
+                )
+              ])
+            : _vm._e()
+        ])
+      }),
+      0
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "nav nav-pills todo-nav" }, [
-      _c(
-        "li",
-        { staticClass: "nav-item all-task ", attrs: { role: "presentation" } },
-        [
-          _c("a", { staticClass: "nav-link", attrs: { href: "/alltasks" } }, [
-            _vm._v("All")
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        {
-          staticClass: "nav-item deleted-task",
-          attrs: { role: "presentation" }
-        },
-        [
-          _c(
-            "a",
-            { staticClass: "nav-link", attrs: { href: "/deletedtaskslist" } },
-            [_vm._v("Deleted")]
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("li", { staticClass: "nav-item", attrs: { role: "presentation" } }, [
-        _c("a", { staticClass: "nav-link", attrs: { href: "/download" } }, [
-          _vm._v("Download Tasks")
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "nav-item pull-right", attrs: { role: "presentation" } },
-        [
-          _c("a", { staticClass: "nav-link", attrs: { href: "/logout" } }, [
-            _vm._v("LogOut")
-          ])
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38220,123 +38125,64 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card card-white" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "todo-list" },
-              _vm._l(_vm.tasks, function(task) {
-                return _c("div", [
-                  task.status == 0
-                    ? _c("div", [
-                        _c("div", { staticClass: "todo-item" }, [
-                          _vm._m(1, true),
-                          _vm._v(" "),
-                          _c("span", [_vm._v(_vm._s(task.name))]),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "pull-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-success",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.restore(task.id)
-                                  }
-                                }
-                              },
-                              [_vm._v("Restore")]
-                            )
-                          ])
-                        ])
-                      ])
-                    : task.status == 1
-                    ? _c("div", [
-                        _c("div", { staticClass: "todo-item" }, [
-                          _vm._m(2, true),
-                          _vm._v(" "),
-                          _c("span", [_vm._v(_vm._s(task.name))]),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "pull-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-success",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.restore(task.id)
-                                  }
-                                }
-                              },
-                              [_vm._v("Restore")]
-                            )
-                          ])
-                        ])
-                      ])
-                    : _vm._e()
+  return _c(
+    "div",
+    { staticClass: "todo-list" },
+    _vm._l(_vm.tasks, function(task) {
+      return _c("div", [
+        task.status == 0
+          ? _c("div", [
+              _c("div", { staticClass: "todo-item" }, [
+                _vm._m(0, true),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(task.name))]),
+                _vm._v(" "),
+                _c("span", { staticClass: "pull-right" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-success",
+                      on: {
+                        click: function($event) {
+                          return _vm.restore(task.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Restore")]
+                  )
                 ])
-              }),
-              0
-            )
-          ])
-        ])
+              ])
+            ])
+          : task.status == 1
+          ? _c("div", [
+              _c("div", { staticClass: "todo-item" }, [
+                _vm._m(1, true),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(task.name))]),
+                _vm._v(" "),
+                _c("span", { staticClass: "pull-right" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-success",
+                      on: {
+                        click: function($event) {
+                          return _vm.restore(task.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Restore")]
+                  )
+                ])
+              ])
+            ])
+          : _vm._e()
       ])
-    ])
-  ])
+    }),
+    0
+  )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "nav nav-pills todo-nav" }, [
-      _c(
-        "li",
-        { staticClass: "nav-item all-task ", attrs: { role: "presentation" } },
-        [
-          _c("a", { staticClass: "nav-link", attrs: { href: "/alltasks" } }, [
-            _vm._v("All")
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        {
-          staticClass: "nav-item completed-task",
-          attrs: { role: "presentation" }
-        },
-        [
-          _c(
-            "a",
-            { staticClass: "nav-link", attrs: { href: "/deletedtaskslist" } },
-            [_vm._v("Deleted")]
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("li", { staticClass: "nav-item", attrs: { role: "presentation" } }, [
-        _c("a", { staticClass: "nav-link", attrs: { href: "/download" } }, [
-          _vm._v("Download Tasks")
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "nav-item pull-right", attrs: { role: "presentation" } },
-        [
-          _c("a", { staticClass: "nav-link", attrs: { href: "/logout" } }, [
-            _vm._v("LogOut")
-          ])
-        ]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

@@ -51,6 +51,11 @@
                 <button type="submit" class="btn btn-success">Login</button>
             </div>
         </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a href="/register" style="text-decoration: none">Don't have an account? Create here</a>
+                </div>
+            </div>
     </form>
 </div>
 

@@ -14,9 +14,9 @@ use File;
 class TaskController extends Controller
 {
     public function index(){
-        $id = request()->user()->id;
+        $id = Auth::id();
         $api_data = Task::where("user_id",$id)->get();
-        return view('task.alltasks',compact('api_data'));
+        return response()->json(['api_data' =>  $api_data]);
     }
 
     public function create(Request $request){
@@ -34,32 +34,32 @@ class TaskController extends Controller
     public function softdelete($id){
         Task::find($id)->delete();
 
-        return redirect()->route("dashboard");
+        return response()->json(['success' =>  "task deleted"]);
     }
 
     public function completeTask($id){
         $task = Task::find($id);
         $task->status = "1";
         $task->save();
-        return redirect()->route("dashboard");
+        return response()->json(['success' =>  "task completed"]);
     }
 
     public function pendingTask($id){
         $task = Task::find($id);
         $task->status = "0";
         $task->save();
-        return redirect()->route("dashboard");
+        return response()->json(['success' =>  "task make pending"]);
     }
 
     public function deletedTasksList(){
-        $id = request()->user()->id;
+        $id = Auth::id();
         $api_data = Task::where("user_id",$id)->onlyTrashed()->get();
-        return view('task.deletedtasks',compact('api_data'));
+        return response()->json(['api_data' =>  $api_data]);
     }
 
     public function retriveDeletedTask($id){
         $task = Task::withTrashed()->find($id)->restore();;
-        return redirect()->route("dashboard");
+        return response()->json(['success' =>  "task restored"]);
     }
     public function jsonFileDownload()
     {

@@ -16,9 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/{home?}', function (){
+    return view('task.alltasks');
+})->where('home', 'alltasks|home')
+    ->name('dashboard')->middleware('auth');
+
+Route::get('/deletedtaskslist', function (){
+    return view('task.deletedtasks');
+})->name("deletedtaskslist")->middleware('auth');
+
 Route::get('/basic', [BasicController::class,"index"]);
 Route::get('/login', [AuthController::class,"login"])->name('login');
 Route::get('/register', [AuthController::class,"register"]);
@@ -28,16 +34,25 @@ Route::post('/loginpost', [AuthController::class, 'login_post'])
     ->name('loginpost');
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
-Route::get('/alltasks',[TaskController::class,"index"])->name('dashboard')->middleware('auth');
+
+
 Route::post('/createtask',[TaskController::class,"create"]);
-Route::get('/softdelete/{id}',[TaskController::class,"softdelete"])->middleware('auth');
-Route::get('/completetask/{id}',[TaskController::class,"completeTask"])
+
+Route::delete('/softdelete/{id}',[TaskController::class,"softdelete"])->middleware('auth');
+
+Route::post('/completetask/{id}',[TaskController::class,"completeTask"])
     ->name("completetask")->middleware('auth');
-Route::get('/pendingtask/{id}',[TaskController::class,"pendingTask"])
+
+Route::post('/pendingtask/{id}',[TaskController::class,"pendingTask"])
     ->name("pendingtask")->middleware('auth');
-Route::get('/deletedtaskslist',[TaskController::class,"deletedTasksList"])
-    ->name("deletedtaskslist")->middleware('auth');
-Route::get('/retrivedeletedtask/{id}',[TaskController::class,"retriveDeletedTask"])
+
+Route::post('/retrivedeletedtask/{id}',[TaskController::class,"retriveDeletedTask"])
     ->name("retrivedeletedtask")->middleware('auth');
 
 Route::get('/download', [TaskController::class, 'jsonFileDownload']);
+
+Route::get('/gettasks',[TaskController::class,"index"])
+    ->middleware('auth');
+
+Route::get('/getdeletedtasks',[TaskController::class,"deletedTasksList"])
+    ->name("getdeletedtasks")->middleware('auth');

@@ -81,7 +81,7 @@
 </head>
 <body>
 <div id="app">
-    <deletedtasks-component :api-data='{{ json_encode($api_data) }}' ></deletedtasks-component>
+    <deletedtasks-component></deletedtasks-component>
 </div>
 <script src="{{ asset('js/app.js') }}"></script>
 </body>

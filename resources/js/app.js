@@ -20,7 +20,6 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('basic-component', require('./components/Basic.vue').default);
 Vue.component('alltasks-component', require('./components/AllTasks.vue').default);
 Vue.component('deletedtasks-component', require('./components/DeletedTasks.vue').default);
 /**

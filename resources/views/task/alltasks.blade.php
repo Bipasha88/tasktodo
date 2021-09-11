@@ -81,7 +81,7 @@
 </head>
 <body>
 <div id="app">
-<alltasks-component :api-data='{{ json_encode($api_data) }}' ></alltasks-component>
+<alltasks-component></alltasks-component>
 </div>
 <script src="{{ asset('js/app.js') }}"></script>
 </body>

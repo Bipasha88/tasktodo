@@ -29,3 +29,15 @@ Route::post('/loginpost', [AuthController::class, 'login_post'])
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
 Route::get('/alltasks',[TaskController::class,"index"])->name('dashboard')->middleware('auth');
+Route::post('/createtask',[TaskController::class,"create"]);
+Route::get('/softdelete/{id}',[TaskController::class,"softdelete"])->middleware('auth');
+Route::get('/completetask/{id}',[TaskController::class,"completeTask"])
+    ->name("completetask")->middleware('auth');
+Route::get('/pendingtask/{id}',[TaskController::class,"pendingTask"])
+    ->name("pendingtask")->middleware('auth');
+Route::get('/deletedtaskslist',[TaskController::class,"deletedTasksList"])
+    ->name("deletedtaskslist")->middleware('auth');
+Route::get('/retrivedeletedtask/{id}',[TaskController::class,"retriveDeletedTask"])
+    ->name("retrivedeletedtask")->middleware('auth');
+
+Route::get('/download', [TaskController::class, 'jsonFileDownload']);

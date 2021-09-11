@@ -4,34 +4,37 @@
             <div class="col-md-12">
                 <div class="card card-white">
                     <div class="card-body">
-                        <form action="">
-                            <div><input type="text" class="form-control add-task" placeholder="New Task..."></div>
-                            <br>
-                            <span><button type="submit" class="btn btn-info">Create</button></span>
-                        </form>
                         <ul class="nav nav-pills todo-nav">
-                            <li role="presentation" class="nav-item all-task active"><a href="#" class="nav-link">All</a></li>
-                            <li role="presentation" class="nav-item active-task"><a href="#" class="nav-link">Active</a></li>
-                            <li role="presentation" class="nav-item completed-task"><a href="#" class="nav-link">Completed</a></li>
+                            <li role="presentation" class="nav-item all-task "><a href="/alltasks" class="nav-link">All</a></li>
+                            <li role="presentation" class="nav-item deleted-task"><a href="/deletedtaskslist" class="nav-link">Deleted</a></li>
+                            <li role="presentation" class="nav-item"><a href="/download" class="nav-link">Download Tasks</a></li>
+                            <li role="presentation" class="nav-item pull-right"><a href="/logout" class="nav-link">LogOut</a></li>
                         </ul>
-                        <div class="todo-list">
+                        <div >
+                            <div><input  v-model="form.name" type="text" class="form-control add-task" name="name" placeholder="New Task..."></div>
+
+                            <br>
+                            <button type="submit" class="btn btn-info"  @click="create">Create</button>
+                        </div>
+
+                        <ul class="todo-list">
                             <div v-for="task in value">
                                 <div v-if="task.status == 0">
-                            <div class="todo-item">
-                                <div class="checker"><span class=""><input type="checkbox" ></span></div>
+                            <li class="todo-item" style="list-style: none">
+                                <div class="checker"><span class=""><input type="checkbox" @click="complete(task.id)"></span></div>
                                 <span>{{task.name}}</span>
-                                <span class="pull-right"><a href="#" class="btn btn-danger">Delete</a></span>
-                            </div>
+                                <span class="pull-right"><a v-bind:href="'/softdelete/'+ task.id" class="btn btn-danger">Delete</a></span>
+                            </li>
                                 </div>
                                 <div v-else-if="task.status == 1">
-                                    <div class="todo-item">
-                                        <div class="checker"><span class=""><input type="checkbox" checked></span></div>
+                                    <li class="todo-item" style="list-style: none">
+                                        <div class="checker"><span class=""><input type="checkbox"  @click="pending(task.id)" checked></span></div>
                                         <span>{{task.name}}</span>
-                                        <span class="pull-right"><a href="#" class="btn btn-danger">Delete</a></span>
-                                    </div>
+                                        <span class="pull-right"><a v-bind:href="'/softdelete/'+ task.id" class="btn btn-danger">Delete</a></span>
+                                    </li>
                                 </div>
                             </div>
-                        </div>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -40,16 +43,34 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name: 'Tasks',
     props: ['apiData'],
-    data(){
+
+    data () {
         return {
+            form: {
+                name: '',
+            },
             value: this.apiData
         }
     },
-    mounted() {
-        console.log(this.value);
+    methods: {
+        complete(id) {
+            let url = "completetask/"+id;
+            document.location.href=url;
+        },
+        pending(id) {
+            let url = "pendingtask/"+id;
+            document.location.href=url;
+        },
+        create () {
+            axios.post('/createtask',{name: this.form.name})
+                .then(( response ) => {
+                    window.location.assign('/alltasks');
+                })
+        },
     }
 }
 </script>

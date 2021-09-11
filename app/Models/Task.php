@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Task extends Model
 {
     use SoftDeletes;
-    public $fillable = ['name','status'];
+    public $fillable = ['name','status','user_id'];
 
 
     /**

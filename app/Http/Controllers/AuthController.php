@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -22,7 +24,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-
+            Task::onlyTrashed()->where('deleted_at', '<', Carbon::now()->subDays(30))->forceDelete();
             return redirect()->route('dashboard');
         }
 

@@ -22,7 +22,7 @@ window.Vue = require('vue').default;
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('basic-component', require('./components/Basic.vue').default);
 Vue.component('alltasks-component', require('./components/AllTasks.vue').default);
-
+Vue.component('deletedtasks-component', require('./components/DeletedTasks.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

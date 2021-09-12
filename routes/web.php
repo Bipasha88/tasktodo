@@ -31,9 +31,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/{home?}', function () {
-        return view('task.alltasks');
-    })->where('home', 'alltasks|home')->name('dashboard');
+    Route::get('/alltasks', [TaskController::class, "allTasks"])->name('dashboard');
 
     Route::get('/deletedtaskslist', function () {
         return view('task.deletedtasks');
@@ -57,3 +55,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/sort', [TaskController::class, "sortableTasks"]);
+Route::post('/nested', [TaskController::class,"nested"]);
+
+

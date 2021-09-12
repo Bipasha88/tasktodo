@@ -23,11 +23,12 @@ class TaskController extends Controller
             'name' => 'required|string',
         ]);
 
-        Task::create([
+        $task = Task::create([
             'name' => $request->name,
+            'status' => "0",
             'user_id' => Auth::id(),
         ]);
-        return redirect()->route("dashboard");
+        return response()->json($task);
     }
 
     public function softdelete($id)
@@ -85,5 +86,15 @@ class TaskController extends Controller
         $id = Auth::id();
         $api_data = Task::where("user_id", $id)->get();
         return view('task.sort', compact("api_data"));
+    }
+    public function allTasks()
+    {
+        $id = Auth::id();
+        $api_data = Task::where("user_id", $id)->get();
+        return view('task.alltasks', compact("api_data"));
+    }
+
+    public function nested(Request $request){
+        dd($request->nested);
     }
 }

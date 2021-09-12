@@ -2065,14 +2065,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_nestable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-nestable */ "./node_modules/vue-nestable/dist/index.umd.min.js");
+/* harmony import */ var vue_nestable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_nestable__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ComponentExample__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ComponentExample */ "./resources/js/components/ComponentExample.vue");
 //
 //
 //
@@ -2100,23 +2098,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vue_nestable__WEBPACK_IMPORTED_MODULE_0__.VueNestable);
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vue_nestable__WEBPACK_IMPORTED_MODULE_0__.VueNestableHandle);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Tasks',
-  props: ['apiData'],
+  components: {
+    ComponentExample: _ComponentExample__WEBPACK_IMPORTED_MODULE_2__["default"],
+    VueNestable: vue_nestable__WEBPACK_IMPORTED_MODULE_0__.VueNestable,
+    VueNestableHandle: vue_nestable__WEBPACK_IMPORTED_MODULE_0__.VueNestableHandle
+  },
+  props: {
+    apiData: {
+      type: Array
+    }
+  },
   data: function data() {
     return {
-      form: {
+      newTask: {
         name: ''
       },
-      tasks: ''
+      tasks: this.apiData
     };
   },
-  mounted: function mounted() {
-    this.getAllTask();
-  },
+  mounted: function mounted() {},
   methods: {
     complete: function complete(id) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('completetask/' + id);
+      axios__WEBPACK_IMPORTED_MODULE_1___default().post('completetask/' + id);
       this.tasks = this.tasks.filter(function (task) {
         if (task.id === id) {
           task.status === "1";
@@ -2125,7 +2135,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     pending: function pending(id) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('pendingtask/' + id);
+      axios__WEBPACK_IMPORTED_MODULE_1___default().post('pendingtask/' + id);
       this.tasks = this.tasks.filter(function (task) {
         if (task.id === id) {
           task.status === "0";
@@ -2136,26 +2146,32 @@ __webpack_require__.r(__webpack_exports__);
     create: function create() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/createtask', {
-        name: this.form.name
+      axios__WEBPACK_IMPORTED_MODULE_1___default().post('/createtask', {
+        name: this.newTask.name
       }).then(function (response) {
-        _this.form.name = "";
+        _this.newTask.name = "";
 
-        _this.getAllTask();
+        _this.tasks.push(response.data);
       });
     },
     getAllTask: function getAllTask() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/gettasks").then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default().get("/gettasks").then(function (response) {
         _this2.tasks = response.data;
       });
     },
     deleteTask: function deleteTask(id) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]('softdelete/' + id);
+      axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]('softdelete/' + id);
       this.tasks = this.tasks.filter(function (task) {
         return task.id !== id;
       });
+    },
+    input: function input(value) {
+      console.log("Abc");
+      axios__WEBPACK_IMPORTED_MODULE_1___default().post('/nested', {
+        nested: value
+      }).then(function (response) {});
     }
   }
 });
@@ -2317,9 +2333,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _ComponentExample_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ComponentExample.vue */ "./resources/js/components/ComponentExample.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_nestable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-nestable */ "./node_modules/vue-nestable/dist/index.umd.min.js");
 /* harmony import */ var vue_nestable__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_nestable__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -2333,8 +2351,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vue_nestable__WEBPACK_IMPORTED_MODULE_1__.VueNestable);
-vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vue_nestable__WEBPACK_IMPORTED_MODULE_1__.VueNestableHandle);
+
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vue_nestable__WEBPACK_IMPORTED_MODULE_1__.VueNestable);
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vue_nestable__WEBPACK_IMPORTED_MODULE_1__.VueNestableHandle);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     ComponentExample: _ComponentExample_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -2354,7 +2373,10 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vue_nestable__WEBPACK_IMPORTED_M
   mounted: function mounted() {},
   methods: {
     input: function input(value) {
-      console.log(value);
+      console.log("Abc");
+      axios__WEBPACK_IMPORTED_MODULE_2___default().post('/nested', {
+        nested: value
+      }).then(function (response) {});
     },
     change: function change(value, options) {
       console.log(value);
@@ -38659,147 +38681,122 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "form",
-      {
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.create.apply(null, arguments)
+  return _c(
+    "div",
+    [
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.create.apply(null, arguments)
+            }
           }
-        }
-      },
-      [
-        _c("div", [
+        },
+        [
           _c("div", [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.name,
-                  expression: "form.name"
-                }
-              ],
-              staticClass: "form-control add-task",
-              attrs: { type: "text", name: "name", placeholder: "New Task..." },
-              domProps: { value: _vm.form.name },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _c("div", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newTask.name,
+                    expression: "newTask.name"
                   }
-                  _vm.$set(_vm.form, "name", $event.target.value)
+                ],
+                staticClass: "form-control add-task",
+                attrs: {
+                  type: "text",
+                  name: "name",
+                  placeholder: "New Task..."
+                },
+                domProps: { value: _vm.newTask.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.newTask, "name", $event.target.value)
+                  }
                 }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-info", attrs: { type: "submit" } },
-            [_vm._v("Create")]
-          )
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "ul",
-      { staticClass: "todo-list" },
-      _vm._l(_vm.tasks, function(task) {
-        return _c("div", [
-          task.status == 0
-            ? _c("div", [
-                _c(
-                  "li",
-                  {
-                    staticClass: "todo-item",
-                    staticStyle: { "list-style": "none" }
-                  },
-                  [
-                    _c("div", { staticClass: "checker" }, [
-                      _c("span", {}, [
-                        _c("input", {
-                          attrs: { type: "checkbox" },
-                          on: {
-                            click: function($event) {
-                              return _vm.complete(task.id)
-                            }
+              })
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "btn btn-info", attrs: { type: "submit" } },
+              [_vm._v("Create")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("VueNestable", {
+        on: { input: _vm.input },
+        scopedSlots: _vm._u([
+          {
+            key: "default",
+            fn: function(ref) {
+              var item = ref.item
+              return _c("VueNestableHandle", { attrs: { item: item } }, [
+                item.status == 0
+                  ? _c("span", [
+                      _c("input", {
+                        attrs: { type: "checkbox" },
+                        on: {
+                          click: function($event) {
+                            return _vm.complete(item.id)
                           }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(task.name))]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "pull-right" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-danger",
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteTask(task.id)
-                            }
-                          }
-                        },
-                        [_vm._v("Delete")]
-                      )
+                        }
+                      })
                     ])
-                  ]
+                  : item.status == 1
+                  ? _c("span", [
+                      _c("input", {
+                        attrs: { type: "checkbox", checked: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.pending(item.id)
+                          }
+                        }
+                      })
+                    ])
+                  : _vm._e(),
+                _vm._v(
+                  "\n\n            " + _vm._s(item.name) + "\n            "
+                ),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn-danger pull-right",
+                    attrs: { type: "submit" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteTask(item.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Delete")]
                 )
               ])
-            : task.status == 1
-            ? _c("div", [
-                _c(
-                  "li",
-                  {
-                    staticClass: "todo-item",
-                    staticStyle: { "list-style": "none" }
-                  },
-                  [
-                    _c("div", { staticClass: "checker" }, [
-                      _c("span", {}, [
-                        _c("input", {
-                          attrs: { type: "checkbox", checked: "" },
-                          on: {
-                            click: function($event) {
-                              return _vm.pending(task.id)
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(task.name))]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "pull-right" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-danger",
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteTask(task.id)
-                            }
-                          }
-                        },
-                        [_vm._v("Delete")]
-                      )
-                    ])
-                  ]
-                )
-              ])
-            : _vm._e()
-        ])
-      }),
-      0
-    )
-  ])
+            }
+          }
+        ]),
+        model: {
+          value: _vm.tasks,
+          callback: function($$v) {
+            _vm.tasks = $$v
+          },
+          expression: "tasks"
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -39017,20 +39014,25 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("VueNestable", {
+    on: { input: _vm.input },
     scopedSlots: _vm._u([
       {
         key: "default",
         fn: function(ref) {
           var item = ref.item
-          return _c("VueNestableHandle", { attrs: { item: item } }, [
-            _c("input", { attrs: { type: "checkbox" } }),
-            _vm._v("\n        " + _vm._s(item.name) + "\n        "),
-            _c(
-              "button",
-              { staticClass: "pull-right", attrs: { type: "submit" } },
-              [_vm._v("Delete")]
-            )
-          ])
+          return _c(
+            "VueNestableHandle",
+            { attrs: { item: item }, on: { change: _vm.change } },
+            [
+              _c("input", { attrs: { type: "checkbox", checked: "" } }),
+              _vm._v("\n        " + _vm._s(item.name) + "\n        "),
+              _c(
+                "button",
+                { staticClass: "pull-right", attrs: { type: "submit" } },
+                [_vm._v("Delete")]
+              )
+            ]
+          )
         }
       }
     ]),

@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', [AuthController::class,"login"])->name('login');
+Route::get('/login', [AuthController::class, "login"])->name('login');
 
-Route::get('/register', [AuthController::class,"register"]);
+Route::get('/register', [AuthController::class, "register"]);
 
 Route::post('/registerpost', [AuthController::class, 'register_post'])
     ->name('registerpost');
@@ -26,36 +26,34 @@ Route::post('/registerpost', [AuthController::class, 'register_post'])
 Route::post('/loginpost', [AuthController::class, 'login_post'])
     ->name('loginpost');
 
-Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-Route::middleware('auth')->group(function (){
+Route::middleware('auth')->group(function () {
 
-    Route::get('/{home?}', function (){
+    Route::get('/{home?}', function () {
         return view('task.alltasks');
     })->where('home', 'alltasks|home')->name('dashboard');
 
-    Route::get('/deletedtaskslist', function (){
+    Route::get('/deletedtaskslist', function () {
         return view('task.deletedtasks');
     })->name("deletedtaskslist");
 
-    Route::post('/createtask',[TaskController::class,"create"]);
+    Route::post('/createtask', [TaskController::class, "create"]);
 
-    Route::delete('/softdelete/{id}',[TaskController::class,"softdelete"]);
+    Route::delete('/softdelete/{id}', [TaskController::class, "softdelete"]);
 
-    Route::post('/completetask/{id}',[TaskController::class,"completeTask"]);
+    Route::post('/completetask/{id}', [TaskController::class, "completeTask"]);
 
-    Route::post('/pendingtask/{id}',[TaskController::class,"pendingTask"]);
+    Route::post('/pendingtask/{id}', [TaskController::class, "pendingTask"]);
 
-    Route::post('/retrivedeletedtask/{id}',[TaskController::class,"retriveDeletedTask"]);
+    Route::post('/retrivedeletedtask/{id}', [TaskController::class, "retriveDeletedTask"]);
 
     Route::get('/download', [TaskController::class, 'jsonFileDownload']);
 
-    Route::get('/gettasks',[TaskController::class,"index"]);
+    Route::get('/gettasks', [TaskController::class, "index"]);
 
-    Route::get('/getdeletedtasks',[TaskController::class,"deletedTasksList"]);
+    Route::get('/getdeletedtasks', [TaskController::class, "deletedTasksList"]);
 });
 
-Route::get('/sort', function (){
-    return view('task.sort');
-});
+Route::get('/sort', [TaskController::class, "sortableTasks"]);

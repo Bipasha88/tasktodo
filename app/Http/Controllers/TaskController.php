@@ -3,23 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
-
+use File;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Response;
-use View;
-use File;
 
 class TaskController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $id = Auth::id();
-        $api_data = Task::where("user_id",$id)->get();
+        $api_data = Task::where("user_id", $id)->get();
         return response()->json($api_data);
     }
 
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         $this->validate($request, [
             'name' => 'required|string',
         ]);
@@ -31,47 +30,60 @@ class TaskController extends Controller
         return redirect()->route("dashboard");
     }
 
-    public function softdelete($id){
+    public function softdelete($id)
+    {
         Task::find($id)->delete();
 
-        return response()->json(['success' =>  "task deleted"]);
+        return response()->json(['success' => "task deleted"]);
     }
 
-    public function completeTask($id){
+    public function completeTask($id)
+    {
         $task = Task::find($id);
         $task->status = "1";
         $task->save();
-        return response()->json(['success' =>  "task completed"]);
+        return response()->json(['success' => "task completed"]);
     }
 
-    public function pendingTask($id){
+    public function pendingTask($id)
+    {
         $task = Task::find($id);
         $task->status = "0";
         $task->save();
-        return response()->json(['success' =>  "task make pending"]);
+        return response()->json(['success' => "task make pending"]);
     }
 
-    public function deletedTasksList(){
+    public function deletedTasksList()
+    {
         $id = Auth::id();
-        $api_data = Task::where("user_id",$id)->onlyTrashed()->get();
-        return response()->json(['api_data' =>  $api_data]);
+        $api_data = Task::where("user_id", $id)->onlyTrashed()->get();
+        return response()->json(['api_data' => $api_data]);
     }
 
-    public function retriveDeletedTask($id){
-        $task = Task::withTrashed()->find($id)->restore();;
-        return response()->json(['success' =>  "task restored"]);
+    public function retriveDeletedTask($id)
+    {
+        $task = Task::withTrashed()->find($id)->restore();
+        return response()->json(['success' => "task restored"]);
     }
+
     public function jsonFileDownload()
     {
         $id = request()->user()->id;
-        $api_data = Task::withTrashed()->where("user_id",$id)->get();
+        $api_data = Task::withTrashed()->where("user_id", $id)->get();
 
         $data = json_encode($api_data);
 
         $jsongFile = time() . '_file.json';
 
-        File::put(public_path('/upload/json/'.$jsongFile), $data);
+        File::put(public_path('/upload/json/' . $jsongFile), $data);
 
-        return Response::download(public_path('/upload/json/'.$jsongFile));
+        return Response::download(public_path('/upload/json/' . $jsongFile));
+    }
+
+    public function sortableTasks()
+    {
+        $id = Auth::id();
+        $api_data = Task::where("user_id", $id)->get();
+        return view('task.sort', compact("api_data"));
     }
 }

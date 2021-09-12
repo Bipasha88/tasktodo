@@ -49,16 +49,26 @@ export default {
     },
     methods: {
         complete(id) {
-            axios.post('completetask/' + id)
-                .then(response => {
-                    this.getAllTask();
-                });
+            axios.post('completetask/' + id);
+            this.tasks = this.tasks.filter(task => {
+                if (task.id === id) {
+                    task.status === "1";
+                    return task;
+                }
+                else
+                    return task;
+            });
         },
         pending(id) {
-            axios.post('pendingtask/' + id)
-                .then(response => {
-                    this.getAllTask();
-                });
+            axios.post('pendingtask/' + id);
+            this.tasks = this.tasks.filter(task => {
+                if (task.id === id ) {
+                    task.status === "0";
+                    return task;
+                }
+                else
+                    return task;
+            });
         },
         create () {
             axios.post('/createtask',{name: this.form.name})
@@ -70,15 +80,14 @@ export default {
         getAllTask(){
             axios.get("/gettasks")
                 .then(response => {
-                    console.log(response.data);
                     this.tasks = response.data;
                 });
         },
         deleteTask(id){
-            axios.delete('softdelete/' + id)
-                .then(response => {
-                    this.getAllTask();
-                });
+            axios.delete('softdelete/' + id);
+            this.tasks = this.tasks.filter(task => {
+                return task.id !== id
+            });
         }
     }
 }

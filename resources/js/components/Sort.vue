@@ -33,7 +33,15 @@ export default {
     },
     mounted() {
     },
-    methods: {},
+    methods: {
+        input(value){
+            console.log(value);
+        },
+        change(value, options){
+            console.log(value);
+            console.log(options);
+        }
+    },
 };
 </script>
 

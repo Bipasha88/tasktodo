@@ -36,9 +36,9 @@ export default {
     methods: {
         restore(id) {
             axios.post('retrivedeletedtask/' + id)
-                .then(response => {
-                    this.getDeletedTasks();
-                });
+            this.tasks = this.tasks.filter(task => {
+                return task.id !== id
+            });
         },
         getDeletedTasks(){
             axios.get("/getdeletedtasks")

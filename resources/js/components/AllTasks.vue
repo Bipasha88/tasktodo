@@ -70,8 +70,8 @@ export default {
         getAllTask(){
             axios.get("/gettasks")
                 .then(response => {
-                    console.log(response.data.api_data);
-                    this.tasks = response.data.api_data;
+                    console.log(response.data);
+                    this.tasks = response.data;
                 });
         },
         deleteTask(id){

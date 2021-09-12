@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "vform": "^2.1.1"
+        "vform": "^2.1.1",
+        "vue-nestable": "^2.6.0"
     }
 }

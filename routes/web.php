@@ -55,3 +55,7 @@ Route::middleware('auth')->group(function (){
 
     Route::get('/getdeletedtasks',[TaskController::class,"deletedTasksList"]);
 });
+
+Route::get('/sort', function (){
+    return view('task.sort');
+});

@@ -90,7 +90,6 @@
                         <li role="presentation" class="nav-item deleted-task"><a href="/deletedtaskslist" class="nav-link">Deleted</a></li>
                         <li role="presentation" class="nav-item"><a href="/download" class="nav-link">Download Tasks</a></li>
                         <li role="presentation" class="nav-item pull-right"><a href="/logout" class="nav-link">LogOut</a></li>
-
                     </ul>
                     @yield('content')
                 </div>

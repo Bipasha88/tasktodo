@@ -8,6 +8,7 @@
             <button type="submit" class="btn btn-info">Create</button>
         </div>
     </form>
+        <br>
         <VueNestable v-model="tasks" @input="input" >
             <VueNestableHandle slot-scope="{ item }" :item="item">
                 <span v-if="item.status == 0">
@@ -108,3 +109,7 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+@import "assets/tasks.css";
+</style>

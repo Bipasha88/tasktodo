@@ -53,8 +53,3 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/getdeletedtasks', [TaskController::class, "deletedTasksList"]);
 });
-
-Route::get('/sort', [TaskController::class, "sortableTasks"]);
-Route::post('/nested', [TaskController::class,"nested"]);
-
-

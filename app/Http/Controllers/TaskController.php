@@ -81,20 +81,10 @@ class TaskController extends Controller
         return Response::download(public_path('/upload/json/' . $jsongFile));
     }
 
-    public function sortableTasks()
-    {
-        $id = Auth::id();
-        $api_data = Task::where("user_id", $id)->get();
-        return view('task.sort', compact("api_data"));
-    }
     public function allTasks()
     {
         $id = Auth::id();
         $api_data = Task::where("user_id", $id)->get();
         return view('task.alltasks', compact("api_data"));
-    }
-
-    public function nested(Request $request){
-        dd($request->nested);
     }
 }

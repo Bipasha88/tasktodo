@@ -12,7 +12,7 @@
                 <div class="todo-item">
                     <div class="checker"><span class=""><input type="checkbox"  checked disabled readonly></span></div>
                     <span>{{task.name}}</span>
-                    <span class="pull-right"><a  @click="restore(task.id)" class="btn btn-success">Restore</a></span>
+                    <span class="pull-right"><a  @click="restore(task.id)" class="btn-success">Restore</a></span>
                 </div>
             </div>
         </div>
